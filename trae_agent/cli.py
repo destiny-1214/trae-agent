@@ -380,4 +380,5 @@ def main():
 
 
 if __name__ == "__main__":
+    # python -m trae_agent.cli run "Create a hello world Python script" --provider deepseek --model deepseek-reasoner
     main()
