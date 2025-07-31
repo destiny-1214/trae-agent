@@ -22,7 +22,7 @@ class LLMProvider(Enum):
     OPENROUTER = "openrouter"
     DOUBAO = "doubao"
     GOOGLE = "google"
-
+    DEEPSEEK = "deepseek"
 
 class LLMClient:
     """Main LLM client that supports multiple providers."""
@@ -66,6 +66,10 @@ class LLMClient:
                 from .google_client import GoogleClient
 
                 self.client = GoogleClient(model_parameters)
+            case LLMProvider.DEEPSEEK:
+                from .deepseek_client import DeepseekClient
+
+                self.client = DeepseekClient(model_parameters)
 
     @property
     def model_parameters(self) -> ModelParameters:
