@@ -1,11 +1,13 @@
 # Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
 # SPDX-License-Identifier: MIT
 
-"""Deepseek provider configuration."""
+"""Deepseek client wrapper with tool integrations"""
 
-import openai
-
-from .openai_compatible_base import ProviderConfig
+from trae_agent.utils.config import ModelConfig
+from trae_agent.utils.llm_clients.openai_compatible_base import (
+    OpenAICompatibleClient,
+    ProviderConfig,
+)
 
 
 class DeepseekProvider(ProviderConfig):
@@ -33,3 +35,10 @@ class DeepseekProvider(ProviderConfig):
         """Check if the model supports tool calling."""
         # Deepseek models generally support tool calling
         return True
+
+
+class DeepseekClient(OpenAICompatibleClient):
+    """Deepseek client wrapper that maintains compatibility while using the new architecture."""
+
+    def __init__(self, model_config: ModelConfig):
+        super().__init__(model_config, DeepseekProvider())
